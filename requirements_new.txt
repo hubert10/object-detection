@@ -1,0 +1,15 @@
+Cython
+numpy
+scipy
+pandas
+Pillow
+matplotlib
+scikit-learn
+tensorflow==2.8.0
+Keras==2.8.0
+opencv-contrib-python==4.5.5.62
+h5py==3.1.0
+Ipython[all]
+
+
+
