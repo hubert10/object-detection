@@ -206,9 +206,9 @@ def conv_block(
 
 def resnet_graph(input_image, architecture, stage5=False, train_bn=True):
     """Build a ResNet graph.
-        architecture: Can be resnet50 or resnet101
-        stage5: Boolean. If False, stage5 of the network is not created
-        train_bn: Boolean. Train or freeze Batch Norm layers
+    architecture: Can be resnet50 or resnet101
+    stage5: Boolean. If False, stage5 of the network is not created
+    train_bn: Boolean. Train or freeze Batch Norm layers
     """
     assert architecture in ["resnet50", "resnet101"]
     # Stage 1
@@ -1128,7 +1128,7 @@ def smooth_l1_loss(y_true, y_pred):
     """
     diff = K.abs(y_true - y_pred)
     less_than_one = K.cast(K.less(diff, 1.0), "float32")
-    loss = (less_than_one * 0.5 * diff ** 2) + (1 - less_than_one) * (diff - 0.5)
+    loss = (less_than_one * 0.5 * diff**2) + (1 - less_than_one) * (diff - 0.5)
     return loss
 
 
@@ -1874,7 +1874,12 @@ def data_generator(
                     image.shape, random_rois, gt_class_ids, gt_boxes
                 )
                 if detection_targets:
-                    rois, mrcnn_class_ids, mrcnn_bbox, mrcnn_mask = build_detection_targets(
+                    (
+                        rois,
+                        mrcnn_class_ids,
+                        mrcnn_bbox,
+                        mrcnn_mask,
+                    ) = build_detection_targets(
                         rpn_rois, gt_class_ids, gt_boxes, gt_masks, config
                     )
 
@@ -2170,15 +2175,15 @@ class MaskRCNN:
 
     def build(self, mode, config):
         """Build Mask R-CNN architecture.
-            input_shape: The shape of the input image.
-            mode: Either "training" or "inference". The inputs and
-                outputs of the model differ accordingly.
+        input_shape: The shape of the input image.
+        mode: Either "training" or "inference". The inputs and
+            outputs of the model differ accordingly.
         """
         assert mode in ["training", "inference"]
 
         # Image size must be dividable by 2 multiple times
         h, w = config.IMAGE_SHAPE[:2]
-        if h / 2 ** 6 != int(h / 2 ** 6) or w / 2 ** 6 != int(w / 2 ** 6):
+        if h / 2**6 != int(h / 2**6) or w / 2**6 != int(w / 2**6):
             raise Exception(
                 "Image size must be dividable by 2 at least 6 times "
                 "to avoid fractions when downscaling and upscaling."
@@ -2783,8 +2788,8 @@ class MaskRCNN:
                     imgaug.augmenters.Fliplr(0.5),
                     imgaug.augmenters.GaussianBlur(sigma=(0.0, 5.0))
                 ])
-	    custom_callbacks: Optional. Add custom callbacks to be called
-	        with the keras fit_generator method. Must be list of type keras.callbacks.
+            custom_callbacks: Optional. Add custom callbacks to be called
+                with the keras fit_generator method. Must be list of type keras.callbacks.
         no_augmentation_sources: Optional. List of sources to exclude for
             augmentation. A source is string that identifies a dataset and is
             defined in the Dataset class.
@@ -3037,7 +3042,12 @@ class MaskRCNN:
         # Process detections
         results = []
         for i, image in enumerate(images):
-            final_rois, final_class_ids, final_scores, final_masks = self.unmold_detections(
+            (
+                final_rois,
+                final_class_ids,
+                final_scores,
+                final_masks,
+            ) = self.unmold_detections(
                 detections[i],
                 mrcnn_mask[i],
                 image.shape,
@@ -3102,7 +3112,12 @@ class MaskRCNN:
         results = []
         for i, image in enumerate(molded_images):
             window = [0, 0, image.shape[0], image.shape[1]]
-            final_rois, final_class_ids, final_scores, final_masks = self.unmold_detections(
+            (
+                final_rois,
+                final_class_ids,
+                final_scores,
+                final_masks,
+            ) = self.unmold_detections(
                 detections[i],
                 mrcnn_mask[i],
                 image.shape,

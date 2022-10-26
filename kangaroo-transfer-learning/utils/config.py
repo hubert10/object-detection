@@ -18,6 +18,7 @@ RCNN_ROOT = os.path.abspath(project_path)
 os.chdir(RCNN_ROOT)
 from mrcnn.config import Config
 
+
 class CustomConfig(Config):
     def __init__(self, num_classes):
 
@@ -59,9 +60,7 @@ class CustomConfig(Config):
 
     # Use a small epoch since the data is simple
     # Number of training steps per epoch
-    STEPS_PER_EPOCH = (
-        30
-    )  # TODO, this needs to be increased to 500 or something when you have high machine capacity
+    STEPS_PER_EPOCH = 30  # TODO, this needs to be increased to 500 or something when you have high machine capacity
 
     # This is how often validation is run. If you are using too much hard drive space
     # on saved models (in the MODEL_DIR), try making this value larger.
@@ -74,7 +73,7 @@ class CustomConfig(Config):
 # Define ROI Raster
 # roi_image = "tile_4096_4096.tif"
 roi_image = "tile_3072_1024.tif"
-#roi_image = "tile_17408-22528.tif"
+# roi_image = "tile_17408-22528.tif"
 # roi_image = "tile_27648-0-mali.tif"
 # roi_image = "tile_3072-53248.tif"
-#roi_image = "debi_tiguet_image.jpg"
+# roi_image = "debi_tiguet_image.jpg"

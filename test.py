@@ -12,19 +12,19 @@ tf.cast
 import warnings
 
 warnings.filterwarnings("ignore")
-#from utils.config import CustomConfig
+# from utils.config import CustomConfig
 
 tf.compat.v1.disable_eager_execution()
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-#BASE_DIR = os.path.dirname(os.path.abspath('./test.ipynb'))
-#PROJECT_ROOT = BASE_DIR + ""
-#print(PROJECT_ROOT)
+# BASE_DIR = os.path.dirname(os.path.abspath('./test.ipynb'))
+# PROJECT_ROOT = BASE_DIR + ""
+# print(PROJECT_ROOT)
 
 # Get the project root directory
-#project_path = PROJECT_ROOT
-#RCNN_ROOT = os.path.abspath(project_path + "Mask_RCNN")
+# project_path = PROJECT_ROOT
+# RCNN_ROOT = os.path.abspath(project_path + "Mask_RCNN")
 os.chdir("./Mask_RCNN")
 print("Printing the current project root dir".format(os.getcwd()))
 
@@ -38,10 +38,10 @@ from PIL import Image, ImageDraw
 import cv2
 import os
 
-CLASS_NAMES = ['building']
+CLASS_NAMES = ["building"]
 
 
-#class SimpleConfig(Config):
+# class SimpleConfig(Config):
 #    NAME = "coco_inference"
 
 #    GPU_COUNT = 1
