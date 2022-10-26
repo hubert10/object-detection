@@ -5,6 +5,11 @@ logs/
 results/
 temp/
 test/
+renamed_to_numbers/
+annots/
+data/
+archive/
+images/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
